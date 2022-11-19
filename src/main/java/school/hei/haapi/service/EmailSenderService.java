@@ -18,9 +18,11 @@ public class EmailSenderService {
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
-
-        mailSender.send(message);
-
-        log.info("MAIL SENT SUCCESSFULLY ....");
+        try {
+            mailSender.send(message);
+            log.info("MAIL SENT SUCCESSFULLY ....");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
