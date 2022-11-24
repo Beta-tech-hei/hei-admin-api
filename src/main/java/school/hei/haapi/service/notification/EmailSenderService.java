@@ -1,4 +1,4 @@
-package school.hei.haapi.service;
+package school.hei.haapi.service.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class EmailSenderService {
     private JavaMailSender mailSender;
 
-    public void  sendEmail(String toEmail,String subject,String body) {
+    public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("hei.jerry.2@gmail.com");
         message.setTo(toEmail);
@@ -20,7 +20,7 @@ public class EmailSenderService {
         message.setText(body);
         try {
             mailSender.send(message);
-            log.info("MAIL SENT SUCCESSFULLY ....");
+            log.info("MAIL SENT TO : " + toEmail);
         } catch (Exception e) {
             e.printStackTrace();
         }

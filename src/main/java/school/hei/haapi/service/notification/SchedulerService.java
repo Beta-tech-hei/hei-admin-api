@@ -1,4 +1,4 @@
-package school.hei.haapi.service;
+package school.hei.haapi.service.notification;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -9,14 +9,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableScheduling
 @AllArgsConstructor
 public class SchedulerService {
-    private EmailSenderService emailSenderService;
+    private NotificationService notificationService;
 
-    @Scheduled(cron = "0 18 18 ? * *")
+    @Scheduled(cron = "0 00 23 ? * *")
     public void crontab() {
-        this.sendMail();
-    }
-
-    public void sendMail() {
-        emailSenderService.sendEmail("hei.nitsiaro@gmail.com", "TEST", "AONAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA HEHE");
+        notificationService.delayedCheckerCheckerListFee();
     }
 }
