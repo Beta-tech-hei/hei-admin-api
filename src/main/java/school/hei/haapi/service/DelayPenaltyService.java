@@ -15,7 +15,7 @@ public class DelayPenaltyService {
     private DelayPenaltyValidator delayPenaltyValidator;
 
     public List<DelayPenalty> getAll() {
-        return delayPenaltyRepository.getAll();
+        return delayPenaltyRepository.findAll();
     }
 
     public DelayPenalty getById(String id) {
@@ -23,7 +23,7 @@ public class DelayPenaltyService {
     }
 
     public DelayPenalty getDelayPenalty() {
-        return delayPenaltyRepository.getAll().get(0);
+        return delayPenaltyRepository.findAll().get(0);
     }
 
     public DelayPenalty save(DelayPenalty delayPenalty) {
