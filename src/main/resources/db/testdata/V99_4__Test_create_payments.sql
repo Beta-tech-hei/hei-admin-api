@@ -6,4 +6,6 @@ values
     ('payment3_id','fee2_id', 'CASH', 'Comment', 5000, '2022-11-11T08:25:26.00Z'),
     ('payment4_id','fee4_id', 'SCHOLARSHIP', null, 5000, '2022-11-12T08:25:26.00Z'),
     ('payment5_id','fee5_id', 'FIX', 'Comment', 5000, '2022-11-12T08:25:26.00Z'),
-    ('payment6_id','fee1_id', 'CASH', 'Comment', 0, '2022-11-15T08:25:25.00Z');
+    ('payment6_id','fee1_id', 'CASH', 'Comment', 0, '2022-11-15T08:25:25.00Z'),
+
+    ('payment9_id','fee9_id', 'CASH', 'Comment', 2000, '2022-10-15T08:25:25.00Z');

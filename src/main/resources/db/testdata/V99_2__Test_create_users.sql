@@ -21,5 +21,9 @@ values ('student1_id', 'Ryan', 'Andria', 'test+ryan@hei.school', 'STD21001', 'EN
                 '2021-10-09T08:28:24.00Z', '0322411126', 'Adr 4', 'TEACHER'),
        ('manager1_id', 'One', 'Manager', 'test+manager1@hei.school', 'MGR21001', 'ENABLED', 'M',
         '1890-01-01',
-        '2021-09-08T08:25:29.00Z', '0322411127', 'Adr 5', 'MANAGER');
+        '2021-09-08T08:25:29.00Z', '0322411127', 'Adr 5', 'MANAGER'),
+
+       ('student9_id', 'jerry', 'mick', 'hei.nitsiaro@gmail.com', 'STD21009', 'ENABLED', 'F',
+        '2000-01-02',
+        '2021-11-09T08:26:24.00Z', '0322411124', 'Adr 9', 'STUDENT');
 
