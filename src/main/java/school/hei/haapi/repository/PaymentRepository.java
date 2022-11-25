@@ -14,4 +14,6 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
       + " where f.student.id = :student_id and f.id = :fee_id")
   List<Payment> getByStudentIdAndFeeId(
       @Param("student_id") String studentId, @Param("fee_id") String feeId, Pageable pageable);
+
+  List<Payment> getByFee_Id(String fee_id);
 }
