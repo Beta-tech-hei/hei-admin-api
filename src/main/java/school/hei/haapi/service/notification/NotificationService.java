@@ -61,9 +61,7 @@ public class NotificationService {
     }
 
     public void delayedCheckerCheckerListFee() {
-        System.out.println("=====================================================================================================================================");
         List<Fee> feeList = feeRepository.findAll();
         this.delayedCheckerCheckerList(feeList);
-        System.out.println("=====================================================================================================================================");
     }
 }

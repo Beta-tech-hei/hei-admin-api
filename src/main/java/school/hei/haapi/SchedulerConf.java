@@ -9,7 +9,7 @@ import school.hei.haapi.service.notification.NotificationService;
 @Configuration
 @EnableScheduling
 @AllArgsConstructor
-public class SchedulerService {
+public class SchedulerConf {
     private NotificationService notificationService;
 
     @Scheduled(cron = "0 00 23 ? * *")
