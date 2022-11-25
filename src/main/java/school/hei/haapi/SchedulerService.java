@@ -1,9 +1,10 @@
-package school.hei.haapi.service.notification;
+package school.hei.haapi;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import school.hei.haapi.service.notification.NotificationService;
 
 @Configuration
 @EnableScheduling

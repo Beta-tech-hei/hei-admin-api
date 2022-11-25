@@ -8,7 +8,6 @@ import school.hei.haapi.model.Payment;
 import school.hei.haapi.repository.FeeRepository;
 import school.hei.haapi.repository.PaymentRepository;
 import school.hei.haapi.service.DelayPenaltyService;
-import school.hei.haapi.service.FeeService;
 
 import java.time.Instant;
 import java.util.Comparator;
@@ -23,7 +22,6 @@ public class NotificationService {
     private final DelayPenaltyService delayPenaltyService;
     private final FeeRepository feeRepository;
     private final PaymentRepository paymentRepository;
-    private final FeeService feeService;
 
     public void latePaymentNotificationEmail(String email, int numberDayLate) {
         emailSenderService.sendEmail(
@@ -57,7 +55,7 @@ public class NotificationService {
             }
         }
     }
-
+    // TODO : CHECK ONLY WHAT HAS A STATUS = LATE
     public void delayedCheckerCheckerList(List<Fee> feeList) {
         feeList.forEach(this::delayedChecker);
     }
@@ -67,29 +65,5 @@ public class NotificationService {
         List<Fee> feeList = feeRepository.findAll();
         this.delayedCheckerCheckerList(feeList);
         System.out.println("=====================================================================================================================================");
-    }
-
-
-    private int computeRemainingAmount(Fee fee) {
-        List<Payment> payments = fee.getPayments();
-        if (payments != null) {
-            int amount = payments
-                    .stream()
-                    .mapToInt(Payment::getAmount)
-                    .sum();
-            return fee.getTotalAmount() - amount;
-        }
-        return fee.getTotalAmount();
-    }
-
-    private school.hei.haapi.endpoint.rest.model.Fee.StatusEnum getFeeStatus(Fee fee) {
-        if (this.computeRemainingAmount(fee) == 0) {
-            return school.hei.haapi.endpoint.rest.model.Fee.StatusEnum.PAID;
-        } else {
-            if (Instant.now().isAfter(fee.getDueDatetime())) {
-                return school.hei.haapi.endpoint.rest.model.Fee.StatusEnum.LATE;
-            }
-            return school.hei.haapi.endpoint.rest.model.Fee.StatusEnum.UNPAID;
-        }
     }
 }
