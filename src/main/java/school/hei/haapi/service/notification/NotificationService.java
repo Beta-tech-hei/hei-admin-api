@@ -9,9 +9,11 @@ import school.hei.haapi.repository.FeeRepository;
 import school.hei.haapi.repository.PaymentRepository;
 import school.hei.haapi.service.DelayPenaltyService;
 
-import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,11 +39,19 @@ public class NotificationService {
                 .sorted(Comparator.comparing(Payment::getCreationDatetime).reversed())
                 .collect(Collectors.toUnmodifiableList());
         List<Payment> paymentListVerified = (paymentList.size() > 0) ? paymentList : null;
-        Date now = Date.from(Instant.now());
-        Date lastTransaction = (paymentListVerified == null) ? Date.from(fee.getCreationDatetime()) : Date.from(paymentListVerified.get(0).getCreationDatetime());
-        if (now.getMonth() - lastTransaction.getMonth() == 1) {
-            int dif1 = now.getDate() - delayPenalty.getApplicabilityDelayAfterGrace();
-            int dif2 = now.getDate() - delayPenalty.getGraceDelay();
+        Calendar calendar = Calendar.getInstance();
+        Calendar lastTransaction = (paymentListVerified == null) ?
+                GregorianCalendar.from(ZonedDateTime.ofInstant(fee.getCreationDatetime(), ZoneId.systemDefault())) :
+                GregorianCalendar.from(ZonedDateTime.ofInstant(paymentListVerified.get(0).getCreationDatetime(), ZoneId.systemDefault()));
+        if (calendar.get(Calendar.MONTH) - lastTransaction.get(Calendar.MONTH) == 1) {
+            System.out.println("==============================================================================================================================");
+            System.out.println("NOW MONTH => "+ calendar.get(Calendar.MONTH));
+            System.out.println("LAST TRANSACTION => "+ lastTransaction.get(Calendar.MONTH));
+            System.out.println("==============================================================================================================================");
+            int dif1 = calendar.get(Calendar.DAY_OF_MONTH) - delayPenalty.getApplicabilityDelayAfterGrace();
+            int dif2 = calendar.get(Calendar.DAY_OF_MONTH) - delayPenalty.getGraceDelay();
+            System.out.println("NOW DAY => " + calendar.get(Calendar.DAY_OF_MONTH));
+            System.out.println("==============================================================================================================================");
             if (dif1 > 0) {
                 this.latePaymentNotificationEmail(
                         fee.getStudent().getEmail(),
@@ -55,6 +65,7 @@ public class NotificationService {
             }
         }
     }
+
     // TODO : CHECK ONLY WHAT HAS A STATUS = LATE
     public void delayedCheckerCheckerList(List<Fee> feeList) {
         feeList.forEach(this::delayedChecker);
